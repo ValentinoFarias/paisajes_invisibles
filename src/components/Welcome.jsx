@@ -37,8 +37,11 @@ export default function Welcome() {
   }
 
   return (
-    <section className="flex min-h-screen items-center justify-center">
-      <h1 className="text-4xl font-bold cursor-pointer" onClick={handleClick}>
+    <section className="flex min-h-screen items-center justify-center bg-black text-white">
+      <h1
+        className="landing-title-impact text-4xl font-bold cursor-pointer"
+        onClick={handleClick}
+      >
         {TEXT.split("").map((char, i) => (
           <span
             key={i}
