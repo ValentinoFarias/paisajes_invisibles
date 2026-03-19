@@ -53,6 +53,16 @@ export default function MenuBar() {
     router.push(`/${locale}/home`);
   }
 
+  function goToPaisajes() {
+    setIsOpen(false);
+    router.push(`/${locale}/paisajes`);
+  }
+
+  function goToInvisibles() {
+    setIsOpen(false);
+    router.push(`/${locale}/invisibles`);
+  }
+
   return (
     <>
       <button
@@ -97,11 +107,18 @@ export default function MenuBar() {
             <button type="button" className="menu-item" onClick={goToHome}>
               {t("home")}
             </button>
-            <button type="button" className="menu-item">
+            <button type="button" className="menu-item" onClick={goToPaisajes}>
               {t("paisajes")}
             </button>
-            <button type="button" className="menu-item">
+            <button
+              type="button"
+              className="menu-item"
+              onClick={goToInvisibles}
+            >
               {t("invisibles")}
+            </button>
+            <button type="button" className="menu-item">
+              {t("gallery")}
             </button>
             <button type="button" className="menu-item">
               {t("about")}

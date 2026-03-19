@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import "../globals.css";
 import "@/assets/css/style.css";
 import { routing } from "@/i18n/routing";
+import SiteCredit from "@/components/SiteCredit";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,6 +51,7 @@ export default async function LocaleLayout({ children, params }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <SiteCredit />
       </body>
     </html>
   );

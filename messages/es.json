@@ -14,8 +14,9 @@
     "home": "INICIO",
     "paisajes": "PAISAJES",
     "invisibles": "INVISIBLES",
-    "about": "ACERCA DE",
-    "contact": "CONTACTO"
+    "about": "ACERCA",
+    "contact": "CONTACTO",
+    "gallery": "GALERIA"
   },
   "nav": {
     "es": "ES",

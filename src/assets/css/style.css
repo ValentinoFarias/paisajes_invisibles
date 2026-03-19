@@ -107,6 +107,55 @@
   margin-left: 1px;
 }
 
+.site-credit {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 20px);
+  margin: 18px 0 clamp(8px, 1.8vh, 18px);
+  padding: 2px 8px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background-color: var(--background);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 6px;
+  font-family: var(--font-text-primary);
+  font-size: clamp(10px, 0.75vw, 12px);
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  user-select: none;
+}
+
+.site-credit--dark {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.site-credit--light {
+  color: rgba(244, 244, 239, 0.86);
+}
+
+.site-credit-line {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  line-height: 1.1;
+  opacity: 0.52;
+}
+
+.site-credit-mark {
+  line-height: 1;
+}
+
+.site-credit-logo {
+  width: 10px;
+  height: 14px;
+  object-fit: contain;
+}
+
 .menu-trigger {
   position: fixed;
   left: 16px;
@@ -169,6 +218,7 @@
   padding: 28px 22px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 26px;
   background: rgba(230, 230, 230, 0.94);
   border-right: 1px solid rgba(0, 0, 0, 0.08);
@@ -183,9 +233,14 @@
 .menu-locale-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 6px 0 12px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 220px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .menu-locale-btn {
@@ -214,12 +269,16 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
+  max-width: 220px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .menu-item {
   border: none;
   background: transparent;
-  text-align: left;
+  text-align: center;
   padding: 10px 0;
   color: var(--color-secondary);
   font-family: var(--font-text-primary);
@@ -332,6 +391,233 @@
   color: var(--color-primary);
 }
 
+.invisibles-page {
+  min-height: 100vh;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+.invisibles-content {
+  width: min(100%, 1320px);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 90px 28px 120px 88px;
+  box-sizing: border-box;
+}
+
+.invisibles-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(280px, 1fr));
+  column-gap: 0;
+  row-gap: 0;
+  align-items: stretch;
+  min-height: clamp(1080px, 150vh, 1600px);
+}
+
+.invisibles-grid-line {
+  position: absolute;
+  background-color: var(--color-tertiary);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.invisibles-grid-line-v {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 5px;
+  transform: translateX(-50%);
+}
+
+.invisibles-grid-line-h1 {
+  left: 0;
+  right: 0;
+  top: 33.333%;
+  height: 5px;
+  transform: translateY(-50%);
+}
+
+.invisibles-grid-line-h2 {
+  left: 0;
+  right: 0;
+  top: 66.666%;
+  height: 5px;
+  transform: translateY(-50%);
+}
+
+.invisibles-card {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  height: 100%;
+  min-height: 0;
+  padding: clamp(18px, 2vw, 30px) clamp(14px, 2vw, 24px);
+  box-sizing: border-box;
+}
+
+.invisibles-name-link {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.invisibles-name {
+  grid-area: 1 / 1;
+  margin: 0;
+  color: var(--color-secondary);
+  font-family: var(--font-title-primary);
+  font-size: clamp(43px, 6.8vw, 102px);
+  line-height: 0.95;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.invisibles-coords {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(16px, 2.8vh, 36px);
+  transform: translateX(-50%);
+  color: var(--color-tertiary);
+  font-family: var(--font-text-primary);
+  font-size: 14px;
+  line-height: 1;
+  text-decoration: underline;
+}
+
+.paula-lorca-page {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+.paula-lorca-content {
+  width: min(100%, 1440px);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 92px 56px 132px 88px;
+  box-sizing: border-box;
+}
+
+.paula-lorca-title {
+  margin: 34px 0 34px;
+  font-family: var(--font-title-primary);
+  font-size: clamp(54px, 9.2vw, 128px);
+  line-height: 0.94;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.paula-lorca-book-wrap {
+  width: min(100%, 1062px);
+  margin: 0 auto clamp(38px, 5.5vw, 72px);
+}
+
+.paula-lorca-book-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1062 / 777;
+  object-fit: cover;
+}
+
+.paula-lorca-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 66px);
+  margin-bottom: clamp(36px, 6vw, 92px);
+}
+
+.paula-lorca-text {
+  margin: 0;
+  font-family: var(--font-text-primary);
+  font-size: clamp(16px, 2.2vw, 32px);
+  line-height: 1.36;
+  white-space: pre-line;
+}
+
+.paula-lorca-gallery-top {
+  position: relative;
+  height: clamp(420px, 72vw, 1100px);
+  margin-bottom: clamp(44px, 7vw, 108px);
+}
+
+.paula-lorca-photo {
+  margin: 0;
+  overflow: hidden;
+}
+
+.paula-lorca-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.paula-lorca-photo-a {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: min(48vw, 678px);
+  aspect-ratio: 678 / 456;
+}
+
+.paula-lorca-photo-b {
+  position: absolute;
+  right: 0;
+  top: clamp(52px, 8.2vw, 182px);
+  width: min(64vw, 903px);
+  aspect-ratio: 903 / 607;
+}
+
+.paula-lorca-photo-c {
+  position: absolute;
+  left: clamp(14px, 3vw, 55px);
+  bottom: 0;
+  width: min(64vw, 903px);
+  aspect-ratio: 903 / 607;
+}
+
+.paula-lorca-quote-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 3.6vw, 54px);
+  margin-bottom: clamp(54px, 8vw, 126px);
+}
+
+.paula-lorca-quote {
+  margin: 0;
+  font-family: var(--font-text-primary);
+  font-size: clamp(16px, 2.2vw, 32px);
+  line-height: 1.34;
+  white-space: pre-line;
+}
+
+.paula-lorca-gallery-bottom {
+  position: relative;
+  height: clamp(380px, 67vw, 810px);
+}
+
+.paula-lorca-photo-d {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: min(64vw, 903px);
+  aspect-ratio: 903 / 607;
+}
+
+.paula-lorca-photo-e {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: min(64vw, 903px);
+  aspect-ratio: 903 / 607;
+}
+
 @media (max-width: 1200px) {
   .navbar-responsive {
     padding-left: 82px !important;
@@ -352,6 +638,23 @@
   .home-main-text {
     font-size: clamp(13px, 2vw, 16px);
   }
+
+  .invisibles-content {
+    padding: 72px 24px 92px 76px;
+  }
+
+  .invisibles-grid {
+    min-height: clamp(920px, 128vh, 1320px);
+  }
+
+  .paula-lorca-content {
+    padding: 74px 24px 104px 76px;
+  }
+
+  .paula-lorca-intro-grid,
+  .paula-lorca-quote-grid {
+    gap: 24px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -369,6 +672,17 @@
     letter-spacing: 0.01em;
   }
 
+  .site-credit {
+    max-width: calc(100% - 14px);
+    margin: 12px 0 8px;
+    font-size: 9px;
+  }
+
+  .site-credit-logo {
+    width: 9px;
+    height: 12px;
+  }
+
   .home-content {
     padding: 16px 12px 24px 56px;
   }
@@ -377,5 +691,68 @@
     font-size: 13px;
     line-height: 1.5;
     padding: 0 6px;
+  }
+
+  .invisibles-content {
+    padding: 56px 14px 72px 56px;
+  }
+
+  .invisibles-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    row-gap: 78px;
+    min-height: auto;
+  }
+
+  .invisibles-grid-line {
+    display: none;
+  }
+
+  .invisibles-name {
+    font-size: clamp(35px, 12.8vw, 58px);
+    line-height: 0.95;
+  }
+
+  .invisibles-coords {
+    position: static;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    margin-top: 24px;
+    font-size: 12px;
+  }
+
+  .paula-lorca-content {
+    padding: 54px 14px 72px 56px;
+  }
+
+  .paula-lorca-title {
+    margin-top: 16px;
+    margin-bottom: 24px;
+  }
+
+  .paula-lorca-intro-grid,
+  .paula-lorca-quote-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .paula-lorca-gallery-top,
+  .paula-lorca-gallery-bottom {
+    position: static;
+    height: auto;
+    display: grid;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .paula-lorca-photo-a,
+  .paula-lorca-photo-b,
+  .paula-lorca-photo-c,
+  .paula-lorca-photo-d,
+  .paula-lorca-photo-e {
+    position: static;
+    width: 100%;
+    aspect-ratio: 1806 / 1214;
   }
 }
