@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "title": "Paisajes Invisibles",
+    "description": "Paisajes Invisibles"
+  },
+  "welcome": {
+    "title": "Paisajes Invisibles"
+  },
+  "home": {
+    "title": "Inicio"
+  },
+  "nav": {
+    "es": "ES",
+    "en": "EN",
+    "switchToSpanish": "Cambiar a español",
+    "switchToEnglish": "Cambiar a inglés"
+  }
+}

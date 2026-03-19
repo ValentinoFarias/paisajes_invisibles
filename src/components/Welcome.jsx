@@ -1,23 +1,26 @@
 "use client";
 
 import { useRef } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 
-const TEXT = "Paisajes Invisibles";
-
 export default function Welcome() {
+  const t = useTranslations("welcome");
+  const locale = useLocale();
   const lettersRef = useRef([]);
   const router = useRouter();
+  const text = t("title");
 
   function handleClick(e) {
     e.preventDefault();
 
     // Build a shuffled array of indices
-    const indices = [...Array(TEXT.length).keys()].filter(
-      (i) => TEXT[i] !== " "
+    const indices = [...Array(text.length).keys()].filter(
+      (i) => text[i] !== " "
     );
     for (let i = indices.length - 1; i > 0; i--) {
+      // eslint-disable-next-line react-hooks/purity
       const j = Math.floor(Math.random() * (i + 1));
       [indices[i], indices[j]] = [indices[j], indices[i]];
     }
@@ -32,7 +35,7 @@ export default function Welcome() {
 
     // Navigate after all letters are gone
     setTimeout(() => {
-      router.push("/home");
+      router.push(`/${locale}/home`);
     }, indices.length * 0.12 * 1000 + 200);
   }
 
@@ -42,7 +45,7 @@ export default function Welcome() {
         className="landing-title-impact text-4xl font-bold cursor-pointer"
         onClick={handleClick}
       >
-        {TEXT.split("").map((char, i) => (
+        {text.split("").map((char, i) => (
           <span
             key={i}
             ref={(el) => (lettersRef.current[i] = el)}

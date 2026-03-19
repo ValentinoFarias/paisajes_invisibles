@@ -1,6 +1,31 @@
 /* Custom styles — non-Tailwind overrides go here */
 
+@font-face {
+  font-family: "Impact Custom";
+  src: url("/assets/fonts/impact-font/impact.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk Text";
+  src: url(
+      "/assets/fonts/neue-haas-grotesk-font-fanily/neuehaasgrottext-55roman-trial.otf"
+    )
+    format("opentype");
+  font-display: swap;
+}
+
+:root {
+  --font-title-primary: "Impact Custom", Impact, Haettenschweiler,
+    "Arial Narrow Bold", sans-serif;
+  --font-text-primary: "Neue Haas Grotesk Text", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  --color-primary: #f4f4ef;
+  --color-secondary: #000000;
+  --color-tertiary: #f80505;
+}
+
 .landing-title-impact {
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-family: var(--font-title-primary);
   font-size: 100px;
 }

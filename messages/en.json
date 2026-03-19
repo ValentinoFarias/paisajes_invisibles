@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "title": "Invisible Landscapes",
+    "description": "Invisible Landscapes"
+  },
+  "welcome": {
+    "title": "Invisible Landscapes"
+  },
+  "home": {
+    "title": "Home"
+  },
+  "nav": {
+    "es": "ES",
+    "en": "EN",
+    "switchToSpanish": "Switch to Spanish",
+    "switchToEnglish": "Switch to English"
+  }
+}

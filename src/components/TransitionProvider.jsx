@@ -5,6 +5,7 @@ import { TransitionRouter } from "next-transition-router";
 import gsap from "gsap";
 
 const BLOCK_SIZE = 60;
+const LOCALES = ["es", "en"];
 
 export default function TransitionProvider({ children }) {
   const transitionGridRef = useRef(null);
@@ -55,15 +56,40 @@ export default function TransitionProvider({ children }) {
     return () => window.removeEventListener("resize", createTransitionGrid);
   }, []);
 
-  const shouldAnimateLandingToHome = (from, to) => {
-    if (!to) return false;
+  const getPathname = (value) => {
+    if (!value) return "";
 
     try {
-      const targetPathname = new URL(to, window.location.origin).pathname;
-      return from === "/" && targetPathname === "/home";
+      return new URL(value, window.location.origin).pathname;
     } catch {
-      return from === "/" && to === "/home";
+      return value;
     }
+  };
+
+  const shouldAnimateLandingToHome = (from, to) => {
+    const fromPathname = getPathname(from);
+    const toPathname = getPathname(to);
+
+    if (fromPathname === "/" && toPathname === "/home") {
+      return true;
+    }
+
+    const fromParts = fromPathname.split("/").filter(Boolean);
+    const toParts = toPathname.split("/").filter(Boolean);
+
+    if (fromParts.length !== 1 || toParts.length !== 2) {
+      return false;
+    }
+
+    const [fromLocale] = fromParts;
+    const [toLocale, toRoute] = toParts;
+
+    return (
+      LOCALES.includes(fromLocale) &&
+      LOCALES.includes(toLocale) &&
+      fromLocale === toLocale &&
+      toRoute === "home"
+    );
   };
 
   return (
