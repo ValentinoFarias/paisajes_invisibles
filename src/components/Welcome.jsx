@@ -40,7 +40,7 @@ export default function Welcome() {
   }
 
   return (
-    <section className="flex min-h-screen items-center justify-center bg-black text-white">
+    <section className="flex min-h-screen items-center justify-center bg-black">
       <h1
         className="landing-title-impact text-4xl font-bold cursor-pointer"
         onClick={handleClick}

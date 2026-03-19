@@ -46,9 +46,47 @@
   min-width: 0;
 }
 
+.navbar-group-fit {
+  width: fit-content;
+  flex: 0 0 auto;
+}
+
 .navbar-link {
   display: inline-block;
   white-space: nowrap;
+}
+
+.navbar-link-fit {
+  width: fit-content;
+  flex: 0 0 auto;
+}
+
+.paisajes-hover-link .paisajes-hover-suffix {
+  transition: color 0.2s ease;
+}
+
+.paisajes-hover-link:hover .paisajes-hover-suffix,
+.paisajes-hover-link:focus-visible .paisajes-hover-suffix {
+  color: rgba(0, 0, 0, 0.42);
+}
+
+.invisibles-hover-link .invisibles-hover-prefix {
+  transition: color 0.2s ease;
+}
+
+.invisibles-hover-link:hover .invisibles-hover-prefix,
+.invisibles-hover-link:focus-visible .invisibles-hover-prefix {
+  color: rgba(0, 0, 0, 0.42);
+}
+
+.navbar-responsive {
+  width: min(100%, 1020px);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  justify-content: space-between !important;
+  gap: 0 !important;
+  padding: 18px 24px 18px 88px !important;
 }
 
 .lang-toggle-button {
@@ -205,21 +243,119 @@
   white-space: pre-line;
 }
 
+.home-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 1020px);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  padding: 24px 24px 32px 88px;
+}
+
+.home-main-text {
+  position: static;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: clamp(14px, 1.4vw, 18px);
+  line-height: 1.6;
+  text-align: left;
+  white-space: pre-line;
+}
+
+.paisajes-page {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+}
+
+.paisajes-page .home-text {
+  color: var(--color-primary);
+}
+
+.paisajes-page .navbar-group > span {
+  color: var(--color-primary) !important;
+}
+
+.paisajes-page .navbar-link {
+  color: var(--color-primary);
+}
+
+.paisajes-page .paisajes-hover-link:hover .paisajes-hover-suffix,
+.paisajes-page .paisajes-hover-link:focus-visible .paisajes-hover-suffix,
+.paisajes-page .invisibles-hover-link:hover .invisibles-hover-prefix,
+.paisajes-page .invisibles-hover-link:focus-visible .invisibles-hover-prefix {
+  color: rgba(244, 244, 239, 0.48);
+}
+
+.paisajes-page .menu-trigger {
+  background-color: var(--color-secondary);
+  border-color: rgba(244, 244, 239, 0.35);
+}
+
+.paisajes-page .menu-trigger-line {
+  background-color: var(--color-primary);
+}
+
+.paisajes-page .menu-sidebar {
+  background: rgba(12, 12, 12, 0.95);
+  border-right: 1px solid rgba(244, 244, 239, 0.2);
+}
+
+.paisajes-page .menu-locale-row {
+  border-bottom: 1px solid rgba(244, 244, 239, 0.2);
+}
+
+.paisajes-page .menu-locale-btn {
+  color: rgba(244, 244, 239, 0.72);
+}
+
+.paisajes-page .menu-locale-btn.active {
+  color: var(--color-primary);
+}
+
+.paisajes-page .menu-locale-separator {
+  color: rgba(244, 244, 239, 0.48);
+}
+
+.paisajes-page .menu-item {
+  color: var(--color-primary);
+}
+
 @media (max-width: 1200px) {
   .navbar-responsive {
-    gap: 120px !important;
+    padding-left: 82px !important;
+    padding-right: 22px !important;
   }
 }
 
 @media (max-width: 900px) {
   .navbar-responsive {
-    gap: 72px !important;
+    padding-left: 76px !important;
+    padding-right: 20px !important;
+  }
+
+  .home-content {
+    padding: 20px 20px 28px 76px;
+  }
+
+  .home-main-text {
+    font-size: clamp(13px, 2vw, 16px);
   }
 }
 
 @media (max-width: 640px) {
   .navbar-responsive {
-    gap: 28px !important;
     padding-left: 56px !important;
     padding-right: 12px !important;
   }
@@ -231,5 +367,15 @@
   .navbar-link {
     font-size: 12px;
     letter-spacing: 0.01em;
+  }
+
+  .home-content {
+    padding: 16px 12px 24px 56px;
+  }
+
+  .home-main-text {
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 0 6px;
   }
 }

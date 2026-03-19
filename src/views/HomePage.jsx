@@ -5,9 +5,11 @@ export default async function Home() {
   const t = await getTranslations("home");
 
   return (
-    <div className="home_background min-h-screen">
+    <div className="home_background home-page min-h-screen">
       <NavBar />
-      <p className="home-text">{t("text")}</p>
+      <main className="home-content">
+        <p className="home-text home-main-text">{t("text")}</p>
+      </main>
     </div>
   );
 }
