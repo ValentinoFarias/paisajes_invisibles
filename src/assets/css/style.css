@@ -42,6 +42,15 @@
   background-color: var(--color-primary);
 }
 
+.navbar-group {
+  min-width: 0;
+}
+
+.navbar-link {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 .lang-toggle-button {
   display: inline-flex;
   align-items: center;
@@ -182,10 +191,45 @@
 }
 
 .home-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-family: var(--font-text-primary);
   font-size: 18px;
   color: var(--color-secondary);
-  max-width: 600px;
-  margin: 40px auto;
+  width: min(90vw, 900px);
+  margin: 0;
   padding: 0 16px;
+  text-align: left;
+  white-space: pre-line;
+}
+
+@media (max-width: 1200px) {
+  .navbar-responsive {
+    gap: 120px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .navbar-responsive {
+    gap: 72px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar-responsive {
+    gap: 28px !important;
+    padding-left: 56px !important;
+    padding-right: 12px !important;
+  }
+
+  .navbar-group {
+    gap: 8px !important;
+  }
+
+  .navbar-link {
+    font-size: 12px;
+    letter-spacing: 0.01em;
+  }
 }

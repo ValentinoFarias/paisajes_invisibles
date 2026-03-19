@@ -48,6 +48,11 @@ export default function MenuBar() {
     router.replace(targetHref);
   }
 
+  function goToHome() {
+    setIsOpen(false);
+    router.push(`/${locale}/home`);
+  }
+
   return (
     <>
       <button
@@ -89,6 +94,9 @@ export default function MenuBar() {
           </div>
 
           <nav className="menu-items">
+            <button type="button" className="menu-item" onClick={goToHome}>
+              {t("home")}
+            </button>
             <button type="button" className="menu-item">
               {t("paisajes")}
             </button>
