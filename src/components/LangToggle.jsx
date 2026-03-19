@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 function replaceLocaleInPath(pathname, locale) {
   const segments = pathname.split("/");
@@ -18,14 +18,14 @@ export default function LangToggle() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   const targetLocale = locale === "es" ? "en" : "es";
-  const nextPath = replaceLocaleInPath(pathname, targetLocale);
-  const query = searchParams.toString();
-  const targetHref = query ? `${nextPath}?${query}` : nextPath;
 
   function handleToggle() {
+    const nextPath = replaceLocaleInPath(pathname, targetLocale);
+    const query =
+      typeof window !== "undefined" ? window.location.search || "" : "";
+    const targetHref = `${nextPath}${query}`;
     router.replace(targetHref);
   }
 
@@ -36,7 +36,7 @@ export default function LangToggle() {
       aria-label={
         targetLocale === "es" ? t("switchToSpanish") : t("switchToEnglish")
       }
-      className="text-white"
+      className="lang-toggle-button"
     >
       {targetLocale === "es" ? t("es") : t("en")}
     </button>

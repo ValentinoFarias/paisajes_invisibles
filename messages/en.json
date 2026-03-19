@@ -7,7 +7,14 @@
     "title": "Invisible Landscapes"
   },
   "home": {
-    "title": "Home"
+    "title": "Home",
+    "text": "Paisaje Invisible explores the aftermath of Chile's 2019-2022 social uprising through the lens of absence, memory, and resilience. The project documents the families of those who lost their lives to state violence, tracing the subtle marks left in urban landscapes once alive with protest.\n\nThe uprising, which began on October 18, 2019, resulted in over 53 deaths, more than 1,500 imprisonments, nearly 300 documented cases of torture and sexual abuse, and over 400 protesters with eye mutilations from police gunfire. Within this context, Paisaje Invisible, to date, has mapped 23 locations nationwide where protesters were killed and recorded testimonies from 12 families, creating a network of remembrance that spans the country.\n\nCommissioned by the Aperture Foundation as part of Creating Stories for Tomorrow (in partnership with FUJIFILM and supported by the VII Foundation), the project has been featured by Amnesty International Chile, Chile's National Arts Funds, and Newsweek Español.\n\nAn interactive web platform and an open SoundCloud archive of interviews extend the work beyond the printed page, offering public access to these personal testimonies."
+  },
+  "menu": {
+    "paisajes": "PAISAJES",
+    "invisibles": "INVISIBLES",
+    "about": "ABOUT",
+    "contact": "CONTACT"
   },
   "nav": {
     "es": "ES",
