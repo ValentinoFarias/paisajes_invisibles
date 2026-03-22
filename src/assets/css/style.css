@@ -1,5 +1,10 @@
 /* Custom styles — non-Tailwind overrides go here */
 
+/* =============================================================================
+   CSS CUSTOM PROPERTIES / DESIGN TOKENS
+   Font faces, then :root variables for typography, colors, and z-index.
+   ============================================================================= */
+
 @font-face {
   font-family: "Impact Custom";
   src: url("/assets/fonts/impact-font/impact.ttf") format("truetype");
@@ -24,22 +29,48 @@
   --color-secondary: #000000;
   --color-tertiary: #f80505;
 }
-  /* =============================================================================
-     Landing page title styles
-     ============================================================================= */
+
+/* =============================================================================
+   BASE / GLOBAL RESET
+   html, body, and element-level resets. (body background lives in globals.css)
+   ============================================================================= */
+
+/* (nothing to add here yet — see globals.css for body styles) */
+
+/* =============================================================================
+   LANDING PAGE  (Welcome.jsx)
+   Full-screen black intro with the animated Impact title.
+   ============================================================================= */
+
 .landing-title-impact {
   font-family: var(--font-title-primary);
   font-size: 100px;
   color: var(--color-primary);
 }
 
+/* =============================================================================
+   PAGE TRANSITION OVERLAY  (PageTransition.jsx)
+   Grid of black blocks that animate in/out between route changes.
+   Lives in globals.css (.transition-grid / .transition-block).
+   ============================================================================= */
 
-  /* =============================================================================
-    Home page title styles
-     ============================================================================= */
+/* (styles are in globals.css) */
 
-.home_background {
-  background-color: var(--color-primary);
+/* =============================================================================
+   HOME PAGE  (HomePage.jsx)
+   Styles listed top → bottom: NavBar, MenuBar, page content, SiteCredit.
+   ============================================================================= */
+
+/* --- NavBar (NavBar.jsx) -------------------------------------------------- */
+
+.navbar-responsive {
+  width: min(100%, 1020px);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  justify-content: space-between !important;
+  gap: 0 !important;
+  padding: 18px 24px !important;
 }
 
 .navbar-group {
@@ -79,15 +110,7 @@
   color: rgba(0, 0, 0, 0.42);
 }
 
-.navbar-responsive {
-  width: min(100%, 1020px);
-  margin-left: auto;
-  margin-right: auto;
-  box-sizing: border-box;
-  justify-content: space-between !important;
-  gap: 0 !important;
-  padding: 18px 24px 18px 88px !important;
-}
+/* --- MenuBar (MenuBar.jsx) ------------------------------------------------ */
 
 .lang-toggle-button {
   display: inline-flex;
@@ -107,60 +130,9 @@
   margin-left: 1px;
 }
 
-.site-credit {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  width: max-content;
-  max-width: calc(100% - 20px);
-  margin: 18px 0 clamp(8px, 1.8vh, 18px);
-  padding: 2px 8px;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  background-color: var(--background);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 6px;
-  font-family: var(--font-text-primary);
-  font-size: clamp(10px, 0.75vw, 12px);
-  letter-spacing: 0.02em;
-  pointer-events: none;
-  user-select: none;
-}
-
-.site-credit--dark {
-  color: rgba(0, 0, 0, 0.8);
-}
-
-.site-credit--light {
-  color: rgba(244, 244, 239, 0.86);
-}
-
-.site-credit-line {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  line-height: 1.1;
-  opacity: 0.52;
-}
-
-.site-credit-mark {
-  line-height: 1;
-}
-
-.site-credit-logo {
-  width: 10px;
-  height: 14px;
-  object-fit: contain;
-}
-
 .menu-trigger {
-  position: fixed;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
+  /* flows inside the navbar — no longer fixed to the left side */
+  position: relative;
   z-index: 1001;
   display: inline-flex;
   width: 40px;
@@ -287,19 +259,10 @@
   cursor: pointer;
 }
 
-.home-text {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-text-primary);
-  font-size: 18px;
-  color: var(--color-secondary);
-  width: min(90vw, 900px);
-  margin: 0;
-  padding: 0 16px;
-  text-align: left;
-  white-space: pre-line;
+/* --- Home content --------------------------------------------------------- */
+
+.home_background {
+  background-color: var(--color-primary);
 }
 
 .home-page {
@@ -316,7 +279,22 @@
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
-  padding: 24px 24px 32px 88px;
+  padding: 24px 24px 32px 24px;
+}
+
+.home-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-text-primary);
+  font-size: 18px;
+  color: var(--color-secondary);
+  width: min(90vw, 900px);
+  margin: 0;
+  padding: 0 16px;
+  text-align: left;
+  white-space: pre-line;
 }
 
 .home-main-text {
@@ -333,9 +311,87 @@
   white-space: pre-line;
 }
 
+/* --- SiteCredit (SiteCredit.jsx) ----------------------------------------- */
+
+.site-credit {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 20px);
+  margin: 18px 0 clamp(8px, 1.8vh, 18px);
+  padding: 2px 8px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-family: var(--font-text-primary);
+  font-size: clamp(10px, 0.75vw, 12px);
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  user-select: none;
+}
+
+.site-credit--dark {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.site-credit--light {
+  color: rgba(244, 244, 239, 0.86);
+}
+
+.site-credit-line {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  line-height: 1.1;
+  opacity: 0.52;
+}
+
+.site-credit-mark {
+  line-height: 1;
+}
+
+.site-credit-logo {
+  width: 10px;
+  height: 14px;
+  object-fit: contain;
+}
+
+/* =============================================================================
+   PAISAJES PAGE  (PaisajesPage.jsx)
+   Dark theme overrides for the 3D terrain viewer. NavBar and MenuBar get
+   inverted colours to stay readable against the black canvas.
+   ============================================================================= */
+
 .paisajes-page {
   background-color: var(--color-secondary);
   color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Two-column split below the navbar */
+.paisajes-split {
+  flex: 1;               /* fills remaining height after the navbar */
+  display: flex;
+}
+
+/* Left column — 3D canvas */
+.paisajes-split-model {
+  width: 50%;
+  position: relative;   /* needed so the canvas can fill it with 100%/100% */
+}
+
+/* Right column — text content */
+.paisajes-split-text {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
 }
 
 .paisajes-page .home-text {
@@ -390,6 +446,11 @@
 .paisajes-page .menu-item {
   color: var(--color-primary);
 }
+
+/* =============================================================================
+   INVISIBLES PAGE  (InvisiblesPage.jsx)
+   Grid layout with red dividing lines and large Impact name cards.
+   ============================================================================= */
 
 .invisibles-page {
   min-height: 100vh;
@@ -489,6 +550,11 @@
   line-height: 1;
   text-decoration: underline;
 }
+
+/* =============================================================================
+   PAULA LORCA PAGE  (PaulaLorcaPage.jsx)
+   Editorial layout with overlapping photo galleries and large title.
+   ============================================================================= */
 
 .paula-lorca-page {
   background-color: var(--color-primary);
@@ -618,21 +684,14 @@
   aspect-ratio: 903 / 607;
 }
 
-@media (max-width: 1200px) {
-  .navbar-responsive {
-    padding-left: 82px !important;
-    padding-right: 22px !important;
-  }
-}
+/* =============================================================================
+   MEDIA QUERIES
+   All breakpoints collected here, ordered smallest → largest.
+   ============================================================================= */
 
 @media (max-width: 900px) {
-  .navbar-responsive {
-    padding-left: 76px !important;
-    padding-right: 20px !important;
-  }
-
   .home-content {
-    padding: 20px 20px 28px 76px;
+    padding: 20px 20px 28px 20px;
   }
 
   .home-main-text {
@@ -640,7 +699,7 @@
   }
 
   .invisibles-content {
-    padding: 72px 24px 92px 76px;
+    padding: 72px 24px 92px 24px;
   }
 
   .invisibles-grid {
@@ -648,7 +707,7 @@
   }
 
   .paula-lorca-content {
-    padding: 74px 24px 104px 76px;
+    padding: 74px 24px 104px 24px;
   }
 
   .paula-lorca-intro-grid,
@@ -658,11 +717,6 @@
 }
 
 @media (max-width: 640px) {
-  .navbar-responsive {
-    padding-left: 56px !important;
-    padding-right: 12px !important;
-  }
-
   .navbar-group {
     gap: 8px !important;
   }
@@ -684,7 +738,7 @@
   }
 
   .home-content {
-    padding: 16px 12px 24px 56px;
+    padding: 16px 12px 24px 12px;
   }
 
   .home-main-text {
@@ -694,7 +748,7 @@
   }
 
   .invisibles-content {
-    padding: 56px 14px 72px 56px;
+    padding: 56px 14px 72px 14px;
   }
 
   .invisibles-grid {
@@ -723,7 +777,7 @@
   }
 
   .paula-lorca-content {
-    padding: 54px 14px 72px 56px;
+    padding: 54px 14px 72px 14px;
   }
 
   .paula-lorca-title {

@@ -17,8 +17,8 @@ export default async function NavBar() {
 
   return (
     <nav className="navbar-responsive flex w-full items-center justify-center gap-200 p-4">
+      {/* Left — Paisajes */}
       <div className="navbar-group navbar-group-fit flex items-center gap-3">
-        <MenuBar />
         <span
           style={{
             color: "var(--color-secondary)",
@@ -33,6 +33,11 @@ export default async function NavBar() {
           </Link>
         </span>
       </div>
+
+      {/* Center — hamburger menu between the two words */}
+      <MenuBar />
+
+      {/* Right — Invisibles */}
       <div className="navbar-group navbar-group-fit flex items-center gap-3">
         <span
           style={{

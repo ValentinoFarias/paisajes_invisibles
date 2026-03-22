@@ -14,6 +14,10 @@ function getLocaleFromPath(pathname) {
 
 export default function SiteCredit() {
   const pathname = usePathname() || "";
+
+  // No credit on the paisajes page — the 3D canvas fills the screen
+  if (/^\/(es|en)\/paisajes(\/|$)/.test(pathname)) return null;
+
   const isDarkTheme = isDarkCreditTheme(pathname);
   const locale = getLocaleFromPath(pathname);
   const logoSrc = isDarkTheme

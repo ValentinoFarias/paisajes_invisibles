@@ -25,6 +25,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Prevent white body flash on the paisajes page */
+body:has(.paisajes-page) {
+  background: #000000;
+}
+
 .transition-grid {
   position: fixed;
   inset: 0;
