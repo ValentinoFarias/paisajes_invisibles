@@ -1,0 +1,141 @@
+"use client";
+// InvisiblesContent.jsx
+// Infinite-scroll grid of all cases with 4 effects:
+//   1. Infinite loop  — a hidden clone below the grid triggers a seamless teleport
+//   2. Scroll snap    — snaps to the nearest 600px row 200ms after scrolling stops
+//   3. Image reveal   — images are hidden by default, fade in while scrolling
+//   4. Hover freeze   — hovering over an entry keeps its image visible
+
+import { useEffect, useRef, useState } from "react";
+import { CASES } from "@/data/cases";
+
+// Height of each grid row in px — scroll snap and infinite loop math depend on this
+const ROW_HEIGHT = 300;
+
+export default function InvisiblesContent() {
+  const gridRef     = useRef(null); // the real grid <div>
+  const clonesRef   = useRef(null); // the hidden clone <div> below
+  const snapTimerRef = useRef(null); // timeout handle for scroll-snap debounce
+  const scrollTRef  = useRef(null); // timeout handle for image-reveal class removal
+
+  useEffect(() => {
+    // Prevent iOS/Safari rubber-band bounce which would break the seamless loop
+    document.documentElement.style.setProperty("overscroll-behavior", "none");
+
+    // Start at position 1 (not 0) so the observer doesn't fire on mount
+    window.scrollTo({ top: 1, behavior: "instant" });
+
+    // ── Effect 1: Infinite loop ─────────────────────────────────────────────
+    // When the clone div enters the viewport, teleport to the equivalent
+    // position in the real grid — the jump is instant so the user can't see it.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && gridRef.current) {
+            // How far the user has scrolled into the clone
+            const overscroll = window.scrollY - gridRef.current.offsetHeight;
+            // Teleport to the same offset from the top of the real grid
+            window.scrollTo({
+              top: Math.max(1, overscroll),
+              behavior: "instant",
+            });
+          }
+        }
+      },
+      { threshold: 0 }
+    );
+
+    if (clonesRef.current) observer.observe(clonesRef.current);
+
+    // ── Effects 2 & 3: Scroll snap + image reveal ───────────────────────────
+    function onScroll() {
+      // Effect 3 — add the scrolling class so CSS makes images visible
+      if (gridRef.current) {
+        gridRef.current.classList.add("inv-scrolling");
+        // Remove class 200ms after the user stops scrolling → images fade out
+        clearTimeout(scrollTRef.current);
+        scrollTRef.current = setTimeout(() => {
+          gridRef.current?.classList.remove("inv-scrolling");
+        }, 200);
+      }
+
+      // Effect 2 — snap to nearest row, but only AFTER scrolling stops.
+      // Using setTimeout (not rAF) so the snap waits 200ms from the last scroll
+      // event — this lets the user actually move between rows without fighting them.
+      clearTimeout(snapTimerRef.current);
+      snapTimerRef.current = setTimeout(() => {
+        const y = Math.max(0, window.scrollY);
+        // Round to the nearest row
+        const row = Math.round(y / ROW_HEIGHT);
+        window.scrollTo({
+          top: row * ROW_HEIGHT + 1,
+          behavior: "smooth",
+        });
+      }, 200);
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // ── Cleanup ─────────────────────────────────────────────────────────────
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(scrollTRef.current);
+      clearTimeout(snapTimerRef.current);
+      document.documentElement.style.removeProperty("overscroll-behavior");
+    };
+  }, []);
+
+  return (
+    <>
+      {/* Real grid ─ the actual scrollable content */}
+      <div ref={gridRef} className="inv-grid">
+        {CASES.map((c) => (
+          <InvEntry key={c.id} caseData={c} />
+        ))}
+      </div>
+
+      {/* Clone grid ─ visually hidden (height: 100dvh, overflow: hidden).
+          Only its intersection with the viewport is observed to trigger the loop. */}
+      <div ref={clonesRef} className="inv-clones" aria-hidden="true">
+        {CASES.map((c) => (
+          <InvEntry key={`clone-${c.id}`} caseData={c} />
+        ))}
+      </div>
+    </>
+  );
+}
+
+// ── Individual entry ─────────────────────────────────────────────────────────
+// Effect 4: hover keeps this entry's image visible for 1 second after mouse leaves.
+
+function InvEntry({ caseData }) {
+  const [hovered, setHovered] = useState(false);
+  const hoverTRef = useRef(null);
+
+  // First image from Cloudinary public IDs stored in cases.js (may be empty)
+  const imgSrc = caseData.images?.[0] ?? null;
+
+  function handleMouseEnter() {
+    clearTimeout(hoverTRef.current);
+    setHovered(true);
+  }
+
+  function handleMouseLeave() {
+    // Keep image visible for 1 second after the mouse leaves
+    hoverTRef.current = setTimeout(() => setHovered(false), 1000);
+  }
+
+  return (
+    <div
+      className={`inv-entry${hovered ? " inv-hovered" : ""}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {imgSrc && (
+        <img src={imgSrc} alt={caseData.name} />
+      )}
+      <span className="inv-entry-name">{caseData.name}</span>
+    </div>
+  );
+}

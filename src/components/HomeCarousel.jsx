@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const STEP_PX      = 675;   // Horizontal distance in px between each item's center
-const SCALE_ACTIVE = 1.45;  // Scale of the center (active) item
+const SCALE_ACTIVE = 1.7;  // Scale of the center (active) item
 const SCALE_IDLE   = 0.87;  // Scale of all off-center items
 const FRICTION     = 0.90;  // Velocity multiplier each frame (lower = stops faster)
 const SNAP_SPEED   = 0.10;  // Lerp factor when snapping to nearest index
