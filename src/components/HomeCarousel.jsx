@@ -116,14 +116,6 @@ export default function HomeCarousel({ photos = [] }) {
       state.raf = requestAnimationFrame(tick);
     }
 
-    // ── Mouse wheel ──────────────────────────────────────────────────────────
-    function onWheel(e) {
-      e.preventDefault(); // stops the page from scrolling
-      // deltaY is in pixels; divide to convert to fractional index units
-      state.vel += e.deltaY * 0.003;
-      startLoop();
-    }
-
     // ── Click-and-drag ───────────────────────────────────────────────────────
     let dragging    = false;
     let dragStartX  = 0;
@@ -183,7 +175,6 @@ export default function HomeCarousel({ photos = [] }) {
     }
 
     // ── Register listeners ───────────────────────────────────────────────────
-    container.addEventListener("wheel",      onWheel,      { passive: false });
     container.addEventListener("mousedown",  onMouseDown);
     window.addEventListener(   "mousemove",  onMouseMove);
     window.addEventListener(   "mouseup",    onMouseUp);
@@ -199,7 +190,6 @@ export default function HomeCarousel({ photos = [] }) {
     // ── Cleanup on unmount ───────────────────────────────────────────────────
     return () => {
       if (state.raf) cancelAnimationFrame(state.raf);
-      container.removeEventListener("wheel",      onWheel);
       container.removeEventListener("mousedown",  onMouseDown);
       window.removeEventListener(   "mousemove",  onMouseMove);
       window.removeEventListener(   "mouseup",    onMouseUp);
