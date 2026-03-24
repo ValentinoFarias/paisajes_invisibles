@@ -147,6 +147,11 @@
   cursor: pointer;
 }
 
+/* Hide the hamburger while the menu is open — the close button inside the sidebar takes over */
+.menu-trigger.is-open {
+  display: none;
+}
+
 .menu-trigger-line {
   width: 16px;
   height: 1.5px;
@@ -170,7 +175,9 @@
   position: fixed;
   inset: 0;
   z-index: 1000;
+  /* Stack children vertically so the sidebar hangs from the top */
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   background: rgba(35, 35, 35, 0.34);
   backdrop-filter: blur(2px);
@@ -185,21 +192,55 @@
 }
 
 .menu-sidebar {
-  width: min(82vw, 300px);
-  height: 100vh;
-  padding: 28px 22px;
+  /* Full width, auto height so it wraps its content */
+  position: relative; /* needed so .menu-close is positioned relative to the sidebar */
+  width: 100%;
+  height: auto;
+  padding: 28px 40px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;        /* Items sit side by side horizontally */
+  align-items: center;
   justify-content: center;
-  gap: 26px;
+  gap: 48px;
   background: rgba(230, 230, 230, 0.94);
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
-  transform: translateX(-100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  /* Start above the viewport, slide down into view */
+  transform: translateY(-100%);
   transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .menu-sidebar.is-open {
-  transform: translateX(0);
+  transform: translateY(0);
+}
+
+/* Close button — sits at the bottom edge of the sidebar, centered horizontally */
+.menu-close {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  /* translateX(-50%) centers it, translateY(50%) pushes it halfway outside the sidebar edge */
+  transform: translateX(-50%) translateY(50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: var(--color-primary);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1002;
+}
+
+/* The two lines form an X */
+.menu-close .menu-trigger-line:nth-child(1) {
+  transform: translateY(3px) rotate(45deg);
+}
+
+.menu-close .menu-trigger-line:nth-child(2) {
+  transform: translateY(-2.5px) rotate(-45deg);
 }
 
 .menu-locale-row {
@@ -207,12 +248,9 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 6px 0 12px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 220px;
-  margin-left: auto;
-  margin-right: auto;
+  /* Separate locale switcher from nav with a right border in horizontal layout */
+  padding: 0 48px 0 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .menu-locale-btn {
@@ -239,12 +277,9 @@
 
 .menu-items {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 100%;
-  max-width: 220px;
-  margin-left: auto;
-  margin-right: auto;
+  /* Nav links sit in a row across the bar */
+  flex-direction: row;
+  gap: 32px;
 }
 
 .menu-item {
@@ -268,11 +303,14 @@
 .home-page {
   display: flex;
   flex-direction: column;
+  /* Clips carousel items that overflow horizontally — spans full viewport so both edges are equal */
+  overflow-x: hidden;
 }
 
 .home-content {
   flex: 1;
   display: flex;
+  flex-direction: column; /* text on top, carousel below */
   align-items: center;
   justify-content: center;
   width: min(100%, 1020px);
@@ -304,11 +342,85 @@
   transform: none;
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding-top: 80px;
   font-size: clamp(14px, 1.4vw, 18px);
   line-height: 1.6;
   text-align: left;
   white-space: pre-line;
+}
+
+/* --- HomeCarousel (HomeCarousel.jsx) -------------------------------------- */
+
+.home-carousel {
+  /* Naturally full-width because it is a direct child of .home-page, not home-content */
+  width: 100%;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Prevent text selection while dragging */
+  user-select: none;
+  -webkit-user-select: none;
+  margin-top: clamp(40px, 6vw, 80px);
+  margin-bottom: 0;
+}
+
+/* The <ul> — items are centered and absolutely positioned inside.
+   Needs an explicit height because the absolute <li> children don't push it open. */
+.home-carousel-track {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  height: clamp(300px, 50vw, 650px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Each photo <li> — positioned relative to the track center via JS transforms.
+   left: 50% anchors the item's left edge to the track center.
+   The JS then applies translateX(-50% + offset) to shift it to its slot. */
+.home-carousel-item {
+  position: absolute;
+  left: 50%;
+  will-change: transform;
+}
+
+/* The photo inside each item */
+.home-carousel-img {
+  display: block;
+  /* Fixed width only — height adjusts automatically to preserve the original ratio */
+  width: clamp(140px, 20vw, 320px);
+  height: auto;
+  /* Prevent the browser's default image drag ghost from interfering */
+  pointer-events: none;
+}
+
+/* Title shown below the carousel */
+.home-carousel-title {
+  margin-top: 20px;
+  font-family: var(--font-text-primary);
+  font-size: clamp(11px, 1.1vw, 14px);
+  color: var(--color-secondary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  height: 20px;
+  line-height: 20px;
+}
+
+/* Visible state — title slides in from below */
+.home-carousel-title--in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hidden state — title slides down and fades out before swapping text */
+.home-carousel-title--out {
+  opacity: 0;
+  transform: translateY(6px);
 }
 
 /* --- SiteCredit (SiteCredit.jsx) ----------------------------------------- */
@@ -384,14 +496,15 @@
   position: relative;   /* needed so the canvas can fill it with 100%/100% */
 }
 
-/* Right column — text content */
+/* Right column — Cardinals list on top, CasePanel below */
 .paisajes-split-text {
   width: 50%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;   /* stack Cardinals and CasePanel vertically */
   padding: 40px;
   box-sizing: border-box;
+  overflow: hidden;         /* children scroll internally, not the column */
+  gap: 32px;
 }
 
 .paisajes-page .home-text {
@@ -424,11 +537,17 @@
 
 .paisajes-page .menu-sidebar {
   background: rgba(12, 12, 12, 0.95);
-  border-right: 1px solid rgba(244, 244, 239, 0.2);
+  border-bottom: 1px solid rgba(244, 244, 239, 0.2);
+}
+
+/* On the dark theme the close button needs a dark background so the light X lines are visible */
+.paisajes-page .menu-close {
+  background: var(--color-secondary);
+  border-color: rgba(244, 244, 239, 0.35);
 }
 
 .paisajes-page .menu-locale-row {
-  border-bottom: 1px solid rgba(244, 244, 239, 0.2);
+  border-right: 1px solid rgba(244, 244, 239, 0.2);
 }
 
 .paisajes-page .menu-locale-btn {
@@ -682,6 +801,137 @@
   bottom: 0;
   width: min(64vw, 903px);
   aspect-ratio: 903 / 607;
+}
+
+/* =============================================================================
+   CARDINALS  (Cardinals.jsx)
+   List of names with optional clickable coordinates in the Paisajes right panel.
+   ============================================================================= */
+
+.cardinals {
+  /* Scrollable list that fills the right panel without overflowing */
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;               /* space between groups */
+  padding: 8px 0;
+}
+
+/* One group = entries that were separated by blank lines in the source data */
+.cardinals-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* A single row: name on the left, coords on the right */
+.cardinals-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.cardinals-name {
+  font-family: var(--font-text-primary);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(244, 244, 239, 0.55);   /* muted — name is secondary info */
+  white-space: nowrap;
+}
+
+/* Coordinates button — looks like a subtle link, clickable */
+.cardinals-coords {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-family: var(--font-text-primary);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: rgba(244, 244, 239, 0.28);   /* very muted until hovered */
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.cardinals-coords:hover,
+.cardinals-coords:focus-visible {
+  color: var(--color-primary);        /* accent color on hover to show it's interactive */
+  outline: none;
+}
+
+/* Selected state — name brightens when its case is active */
+.cardinals-name.is-selected {
+  color: rgba(244, 244, 239, 0.9);
+}
+
+/* Selected state — coords highlight to confirm the active case */
+.cardinals-coords.is-selected {
+  color: var(--color-primary);
+}
+
+/* =============================================================================
+   CASE PANEL  (CasePanel.jsx)
+   Short victim summary shown below Cardinals in PaisajesPage when a
+   coordinate is clicked. Transitions in from opacity 0.
+   ============================================================================= */
+
+.case-panel {
+  flex-shrink: 0;              /* don't compress when Cardinals list is long */
+  border-top: 1px solid rgba(244, 244, 239, 0.12);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Empty state — subtle hint text */
+.case-panel--empty {
+  border-top: none;
+}
+
+.case-panel-hint {
+  font-family: var(--font-text-primary);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(244, 244, 239, 0.2);
+}
+
+/* Victim name heading */
+.case-panel-name {
+  font-family: var(--font-text-primary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: rgba(244, 244, 239, 0.9);
+  margin: 0;
+}
+
+/* Location and death summary paragraphs */
+.case-panel-location,
+.case-panel-summary {
+  font-family: var(--font-text-primary);
+  font-size: 12px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: rgba(244, 244, 239, 0.6);
+  margin: 0;
+}
+
+/* Placeholder text shown while content is not yet added */
+.case-panel-placeholder {
+  color: rgba(244, 244, 239, 0.22);
+  font-style: italic;
+}
+
+/* Coordinate reference at the bottom of the panel */
+.case-panel-coords {
+  font-family: var(--font-text-primary);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: rgba(244, 244, 239, 0.2);
+  margin: 0;
 }
 
 /* =============================================================================

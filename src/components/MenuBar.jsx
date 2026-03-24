@@ -85,6 +85,16 @@ export default function MenuBar() {
           className={`menu-sidebar ${isOpen ? "is-open" : ""}`}
           onClick={(event) => event.stopPropagation()}
         >
+          {/* Close button — centered at the bottom edge of the sidebar */}
+          <button
+            type="button"
+            className="menu-close"
+            onClick={() => setIsOpen(false)}
+            aria-label="Close menu"
+          >
+            <span className="menu-trigger-line" />
+            <span className="menu-trigger-line" />
+          </button>
           <div className="menu-locale-row">
             <button
               type="button"
