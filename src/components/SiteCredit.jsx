@@ -4,7 +4,11 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 function isDarkCreditTheme(pathname) {
-  return /^\/(es|en)\/?$/.test(pathname) || /^\/(es|en)\/paisajes(\/|$)/.test(pathname);
+  return (
+    /^\/(es|en)\/?$/.test(pathname) ||
+    /^\/(es|en)\/paisajes(\/|$)/.test(pathname) ||
+    /^\/(es|en)\/gallery(\/|$)/.test(pathname)
+  );
 }
 
 function getLocaleFromPath(pathname) {

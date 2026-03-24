@@ -28,11 +28,16 @@ export default function InvisiblesContent() {
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting && gridRef.current) {
+            // Get the navbar height so we land below it after teleporting
+            const nav = document.querySelector(".navbar-responsive");
+            const navHeight = nav ? nav.offsetHeight : 0;
+
             // How far the user has scrolled into the clone
             const overscroll = window.scrollY - gridRef.current.offsetHeight;
-            // Teleport to the same offset from the top of the real grid
+            // Teleport to the same offset, but never less than navHeight
+            // so the navbar is already scrolled out of view on arrival
             window.scrollTo({
-              top: Math.max(1, overscroll),
+              top: Math.max(navHeight, overscroll),
               behavior: "instant",
             });
           }

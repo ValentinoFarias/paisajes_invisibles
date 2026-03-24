@@ -30,6 +30,19 @@ body:has(.paisajes-page) {
   background: #000000;
 }
 
+/* Lock html + body to the light background on light pages.
+   Both must be set: body covers the SiteCredit area below the page,
+   html covers the overscroll area that shows above the navbar. */
+html:has(.home-page),
+html:has(.contact-page) {
+  background: #f4f4ef;
+}
+
+body:has(.home-page),
+body:has(.contact-page) {
+  background: #f4f4ef;
+}
+
 .transition-grid {
   position: fixed;
   inset: 0;

@@ -58,7 +58,7 @@
 
 /* =============================================================================
    HOME PAGE  (HomePage.jsx)
-   Styles listed top → bottom: NavBar, MenuBar, page content, SiteCredit.
+   Styles listed top → bottom: NavBar, page content, SiteCredit.
    ============================================================================= */
 
 /* --- NavBar (NavBar.jsx) -------------------------------------------------- */
@@ -110,188 +110,36 @@
   color: rgba(0, 0, 0, 0.42);
 }
 
-/* --- MenuBar (MenuBar.jsx) ------------------------------------------------ */
+/* --- Language toggle (NavBar.jsx) ---------------------------------------- */
 
-.lang-toggle-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 40px;
-  border: 1px solid #d8d8d1;
-  border-radius: 12px;
-  background-color: #f2f2ea;
-  color: var(--color-secondary);
-  font-family: var(--font-text-primary);
-  font-size: 14px;
-  line-height: 1;
-  cursor: pointer;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
-  margin-left: 1px;
-}
-
-.menu-trigger {
-  /* flows inside the navbar — no longer fixed to the left side */
-  position: relative;
-  z-index: 1001;
-  display: inline-flex;
-  width: 40px;
-  height: 40px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 5px;
-  border: 1px solid #d8d8d1;
-  border-radius: 10px;
-  background-color: #f2f2ea;
-  cursor: pointer;
-}
-
-/* Hide the hamburger while the menu is open — the close button inside the sidebar takes over */
-.menu-trigger.is-open {
-  display: none;
-}
-
-.menu-trigger-line {
-  width: 16px;
-  height: 1.5px;
-  background-color: var(--color-secondary);
-  transition: transform 0.28s ease, opacity 0.28s ease;
-}
-
-.menu-trigger.is-open .menu-trigger-line:nth-child(1) {
-  transform: translateY(6.5px) rotate(45deg);
-}
-
-.menu-trigger.is-open .menu-trigger-line:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-trigger.is-open .menu-trigger-line:nth-child(3) {
-  transform: translateY(-6.5px) rotate(-45deg);
-}
-
-.menu-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  /* Stack children vertically so the sidebar hangs from the top */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background: rgba(35, 35, 35, 0.34);
-  backdrop-filter: blur(2px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.28s ease;
-}
-
-.menu-overlay.is-open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.menu-sidebar {
-  /* Full width, auto height so it wraps its content */
-  position: relative; /* needed so .menu-close is positioned relative to the sidebar */
-  width: 100%;
-  height: auto;
-  padding: 28px 40px;
-  display: flex;
-  flex-direction: row;        /* Items sit side by side horizontally */
-  align-items: center;
-  justify-content: center;
-  gap: 48px;
-  background: rgba(230, 230, 230, 0.94);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  /* Start above the viewport, slide down into view */
-  transform: translateY(-100%);
-  transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.menu-sidebar.is-open {
-  transform: translateY(0);
-}
-
-/* Close button — sits at the bottom edge of the sidebar, centered horizontally */
-.menu-close {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  /* translateX(-50%) centers it, translateY(50%) pushes it halfway outside the sidebar edge */
-  transform: translateX(-50%) translateY(50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  width: 36px;
-  height: 36px;
-  background: var(--color-primary);
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 1002;
-}
-
-/* The two lines form an X */
-.menu-close .menu-trigger-line:nth-child(1) {
-  transform: translateY(3px) rotate(45deg);
-}
-
-.menu-close .menu-trigger-line:nth-child(2) {
-  transform: translateY(-2.5px) rotate(-45deg);
-}
-
-.menu-locale-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  /* Separate locale switcher from nav with a right border in horizontal layout */
-  padding: 0 48px 0 0;
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.menu-locale-btn {
+/* EN / ES buttons inside the navbar */
+.navbar-lang-btn {
   border: none;
   background: transparent;
   padding: 0;
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.45);
   font-family: var(--font-text-primary);
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.08em;
   cursor: pointer;
+  transition: color 0.2s ease;
 }
 
-.menu-locale-btn.active {
+.navbar-lang-btn:hover {
+  color: var(--color-secondary);
+}
+
+/* Active locale is full-strength and bold */
+.navbar-lang-btn.active {
   color: var(--color-secondary);
   font-weight: 700;
 }
 
-.menu-locale-separator {
-  color: rgba(0, 0, 0, 0.45);
+.navbar-lang-sep {
+  color: rgba(0, 0, 0, 0.25);
   font-family: var(--font-text-primary);
-  font-size: 14px;
-}
-
-.menu-items {
-  display: flex;
-  /* Nav links sit in a row across the bar */
-  flex-direction: row;
-  gap: 32px;
-}
-
-.menu-item {
-  border: none;
-  background: transparent;
-  text-align: center;
-  padding: 10px 0;
-  color: var(--color-secondary);
-  font-family: var(--font-text-primary);
-  font-size: 17px;
-  letter-spacing: 0.03em;
-  cursor: pointer;
+  font-size: 13px;
+  user-select: none;
 }
 
 /* --- Home content --------------------------------------------------------- */
@@ -473,7 +321,7 @@
 
 /* =============================================================================
    PAISAJES PAGE  (PaisajesPage.jsx)
-   Dark theme overrides for the 3D terrain viewer. NavBar and MenuBar get
+   Dark theme overrides for the 3D terrain viewer. NavBar gets
    inverted colours to stay readable against the black canvas.
    ============================================================================= */
 
@@ -526,44 +374,35 @@
   color: rgba(244, 244, 239, 0.48);
 }
 
-.paisajes-page .menu-trigger {
-  background-color: var(--color-secondary);
-  border-color: rgba(244, 244, 239, 0.35);
+/* Dark theme overrides for the language toggle — shared by Paisajes and Gallery pages */
+.paisajes-page .navbar-lang-btn,
+.gallery-page .navbar-lang-btn {
+  color: rgba(244, 244, 239, 0.45);
 }
 
-.paisajes-page .menu-trigger-line {
-  background-color: var(--color-primary);
-}
-
-.paisajes-page .menu-sidebar {
-  background: rgba(12, 12, 12, 0.95);
-  border-bottom: 1px solid rgba(244, 244, 239, 0.2);
-}
-
-/* On the dark theme the close button needs a dark background so the light X lines are visible */
-.paisajes-page .menu-close {
-  background: var(--color-secondary);
-  border-color: rgba(244, 244, 239, 0.35);
-}
-
-.paisajes-page .menu-locale-row {
-  border-right: 1px solid rgba(244, 244, 239, 0.2);
-}
-
-.paisajes-page .menu-locale-btn {
-  color: rgba(244, 244, 239, 0.72);
-}
-
-.paisajes-page .menu-locale-btn.active {
+.paisajes-page .navbar-lang-btn:hover,
+.gallery-page .navbar-lang-btn:hover {
   color: var(--color-primary);
 }
 
-.paisajes-page .menu-locale-separator {
+.paisajes-page .navbar-lang-btn.active,
+.gallery-page .navbar-lang-btn.active {
+  color: var(--color-primary);
+}
+
+.paisajes-page .navbar-lang-sep,
+.gallery-page .navbar-lang-sep {
+  color: rgba(244, 244, 239, 0.25);
+}
+
+/* Navbar links also need to be light on dark pages */
+.gallery-page .navbar-link {
+  color: var(--color-primary);
+}
+
+.gallery-page .paisajes-hover-link:hover .paisajes-hover-suffix,
+.gallery-page .invisibles-hover-link:hover .invisibles-hover-prefix {
   color: rgba(244, 244, 239, 0.48);
-}
-
-.paisajes-page .menu-item {
-  color: var(--color-primary);
 }
 
 /* =============================================================================
@@ -720,6 +559,189 @@
   text-align: center;
   padding-bottom: 1rem;
   color: var(--color-secondary);
+}
+
+/* =============================================================================
+   GALLERY PAGE  (GalleryLayout.jsx)
+   Dark theme, 3×3 photo grid. Image fills cell; name fades in on hover.
+   ============================================================================= */
+
+.gallery-page {
+  min-height: 100vh;
+  background-color: #000;
+  color: var(--color-primary);
+}
+
+/* Make body black on dark pages so SiteCredit (rendered outside <main>)
+   doesn't sit on a white background */
+body:has(.gallery-page),
+body:has(.paisajes-page) {
+  background-color: #000;
+}
+
+/* Sidebar + grid sit side by side below the navbar, scrollable */
+.gallery-body {
+  display: flex;
+  min-height: calc(100dvh - 60px);
+}
+
+/* Left sidebar — sticky so it stays in view while scrolling through all photos */
+.gallery-sidebar {
+  width: 140px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  padding: 40px 0 40px 32px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  align-self: flex-start;
+}
+
+.gallery-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.gallery-sidebar-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-align: left;
+  font-family: var(--font-text-primary);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(244, 244, 239, 0.4);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.gallery-sidebar-btn:hover {
+  color: rgba(244, 244, 239, 0.8);
+}
+
+/* Active category — full brightness + left accent line */
+.gallery-sidebar-btn.active {
+  color: var(--color-primary);
+  position: relative;
+}
+
+.gallery-sidebar-btn.active::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+}
+
+/* 3-column grid — each row is exactly 1/3 of the viewport so the first 3 fill the screen.
+   More rows scroll naturally below. */
+.gallery-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: calc((100dvh - 60px) / 3);
+  gap: 6px;          /* gap creates the black frame effect between cells */
+  padding: 6px;      /* outer frame around the whole grid */
+  background-color: var(--color-secondary); /* the gap/padding color = frame color */
+}
+
+/* Each cell: image covers the space, name overlays at the bottom */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  /* Black frame: the gap + this outline create a consistent border around every photo */
+  outline: 3px solid var(--color-secondary);
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Subtle zoom on hover */
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.04);
+}
+
+
+/* Lightbox — fullscreen overlay with blur, click outside to close */
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: zoom-out;
+}
+
+.gallery-lightbox-img {
+  max-width: 90vw;
+  max-height: 90dvh;
+  object-fit: contain;
+  cursor: default;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.6);
+}
+
+/* Empty state message */
+.gallery-empty {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-text-primary);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: rgba(244, 244, 239, 0.3);
+  text-transform: uppercase;
+}
+
+/* =============================================================================
+   CONTACT PAGE  (ContactPage.jsx)
+   ============================================================================= */
+
+.contact-page {
+  min-height: 100vh;
+  /* Hardcoded instead of var(--color-primary) because Tailwind v4 intercepts
+     --color-* tokens and can override the variable in dark mode */
+  background-color: #f4f4ef;
+  color: #000000;
+}
+
+/* Center the email link in the remaining space below the navbar.
+   Subtracting ~40px for the SiteCredit footer so it stays visible at the bottom. */
+.contact-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100dvh - 60px - 40px);
+}
+
+.contact-email {
+  font-family: var(--font-text-primary);
+  font-size: clamp(16px, 2vw, 24px);
+  letter-spacing: 0.05em;
+  color: var(--color-secondary);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.contact-email:hover {
+  opacity: 0.5;
 }
 
 /* ── Effect 3: images hidden by default on pointer devices, appear while scrolling ── */
