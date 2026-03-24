@@ -1,21 +1,17 @@
 "use client";
 // InvisiblesContent.jsx
-// Infinite-scroll grid of all cases with 4 effects:
+// Infinite-scroll grid of all cases with 3 effects:
 //   1. Infinite loop  — a hidden clone below the grid triggers a seamless teleport
-//   2. Scroll snap    — snaps to the nearest 600px row 200ms after scrolling stops
-//   3. Image reveal   — images are hidden by default, fade in while scrolling
-//   4. Hover freeze   — hovering over an entry keeps its image visible
+//   2. Image reveal   — images are hidden by default, fade in while scrolling
+//   3. Hover freeze   — hovering over an entry keeps its image visible
 
 import { useEffect, useRef, useState } from "react";
 import { CASES } from "@/data/cases";
 
-// Height of each grid row in px — scroll snap and infinite loop math depend on this
-const ROW_HEIGHT = 300;
 
 export default function InvisiblesContent() {
   const gridRef     = useRef(null); // the real grid <div>
   const clonesRef   = useRef(null); // the hidden clone <div> below
-  const snapTimerRef = useRef(null); // timeout handle for scroll-snap debounce
   const scrollTRef  = useRef(null); // timeout handle for image-reveal class removal
 
   useEffect(() => {
@@ -47,9 +43,9 @@ export default function InvisiblesContent() {
 
     if (clonesRef.current) observer.observe(clonesRef.current);
 
-    // ── Effects 2 & 3: Scroll snap + image reveal ───────────────────────────
+    // ── Effects 2: Image reveal ──────────────────────────────────────────────
     function onScroll() {
-      // Effect 3 — add the scrolling class so CSS makes images visible
+      // Add the scrolling class so CSS makes images visible while scrolling
       if (gridRef.current) {
         gridRef.current.classList.add("inv-scrolling");
         // Remove class 200ms after the user stops scrolling → images fade out
@@ -58,20 +54,6 @@ export default function InvisiblesContent() {
           gridRef.current?.classList.remove("inv-scrolling");
         }, 200);
       }
-
-      // Effect 2 — snap to nearest row, but only AFTER scrolling stops.
-      // Using setTimeout (not rAF) so the snap waits 200ms from the last scroll
-      // event — this lets the user actually move between rows without fighting them.
-      clearTimeout(snapTimerRef.current);
-      snapTimerRef.current = setTimeout(() => {
-        const y = Math.max(0, window.scrollY);
-        // Round to the nearest row
-        const row = Math.round(y / ROW_HEIGHT);
-        window.scrollTo({
-          top: row * ROW_HEIGHT + 1,
-          behavior: "smooth",
-        });
-      }, 200);
     }
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -81,7 +63,6 @@ export default function InvisiblesContent() {
       observer.disconnect();
       window.removeEventListener("scroll", onScroll);
       clearTimeout(scrollTRef.current);
-      clearTimeout(snapTimerRef.current);
       document.documentElement.style.removeProperty("overscroll-behavior");
     };
   }, []);
