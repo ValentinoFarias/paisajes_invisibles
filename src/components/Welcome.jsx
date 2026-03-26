@@ -35,7 +35,7 @@ export default function Welcome() {
       // Navigate after all letters are gone
       setTimeout(() => {
         router.push(`/${locale}/home`);
-      }, indices.length * 0.12 * 2000 + 200);
+      }, indices.length * 0.12 * 1000 + 200);
     }, 1000);
 
     // Cleanup in case the component unmounts before the timeout fires
