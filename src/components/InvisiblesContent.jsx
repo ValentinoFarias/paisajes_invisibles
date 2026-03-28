@@ -32,6 +32,12 @@
 // useState   → gives us a reactive value: when it changes React re-renders
 import { useEffect, useRef, useState } from "react";
 
+// ── Next.js navigation ──────────────────────────────────────────────────────
+// useRouter  → programmatic navigation (router.push) so clicking a case
+//              navigates to /case/[id] without a full page reload
+// useParams  → reads the current URL params so we know the active locale
+import { useRouter, useParams } from "next/navigation";
+
 // ── Data ─────────────────────────────────────────────────────────────────────
 // CASES is an array of objects, one per project/case, imported from a
 // separate data file so this component stays clean and focused on UI logic.
@@ -278,6 +284,12 @@ function InvEntry({ caseData }) {
   // user quickly moves the mouse back in before the timer fires.
   const hoverTRef = useRef(null);
 
+  // ── Navigation ──────────────────────────────────────────────────────────────
+  // useRouter gives us router.push() to navigate programmatically.
+  // useParams gives us the current locale (e.g. "es" or "en") from the URL.
+  const router = useRouter();
+  const { locale } = useParams();
+
   // ── Resolve the image source ────────────────────────────────────────────────
   // `caseData.images` is an array of Cloudinary URLs (could be empty or missing).
   // `?.` optional chaining — safely returns undefined if `images` doesn't exist,
@@ -303,6 +315,13 @@ function InvEntry({ caseData }) {
     hoverTRef.current = setTimeout(() => setHovered(false), 1000);
   }
 
+  // ── Click handler ───────────────────────────────────────────────────────────
+  // Navigates to the case detail page: /es/case/paula-lorca (for example).
+  // Uses the case's `id` field as the URL slug.
+  function handleClick() {
+    router.push(`/${locale}/case/${caseData.id}`);
+  }
+
 
   // ── JSX ─────────────────────────────────────────────────────────────────────
   return (
@@ -317,6 +336,10 @@ function InvEntry({ caseData }) {
       // Attach our mouse handlers to the real DOM events
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+
+      // Navigate to the case detail page on click
+      onClick={handleClick}
+      style={{ cursor: "pointer" }}
     >
       {/* Only render the <img> if imgSrc is not null.
           The `&&` short-circuit pattern is the standard React way to

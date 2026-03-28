@@ -7,7 +7,7 @@
 
 import { useState } from "react";
 import Cardinals from "@/components/Cardinals";
-import CasePanel from "@/components/CasePanel";
+import CasePanel from "@/components/CasePaisajesPanel";
 
 export default function PaisajesSidebar() {
   const [selectedCase, setSelectedCase] = useState(null);

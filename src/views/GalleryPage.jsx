@@ -5,7 +5,8 @@
 import NavBar from "@/components/NavBar";
 import { useGalleryLayout, CATEGORIES } from "@/components/GalleryLayout";
 
-export default function GalleryPage() {
+export default function GalleryPage({ sanityPhotos = {} }) {
+  // Pass Sanity photos to the hook so they merge with Cloudinary ones
   const {
     activeCategory,
     setActiveCategory,
@@ -13,7 +14,7 @@ export default function GalleryPage() {
     lightbox,
     setLightbox,
     handleKeyDown,
-  } = useGalleryLayout();
+  } = useGalleryLayout(sanityPhotos);
 
   return (
     <main className="gallery-page" onKeyDown={handleKeyDown}>

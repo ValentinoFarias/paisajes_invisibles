@@ -54,7 +54,9 @@ export const media = defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Galería', value: 'galeria' },
+          { title: 'Gráficas', value: 'graficas' },
+          { title: 'Paisajes', value: 'paisajes' },
+          { title: 'Protestas', value: 'protestas' },
           { title: 'Portada', value: 'portada' },
           { title: 'Fondo', value: 'fondo' },
           { title: 'Otro', value: 'otro' },

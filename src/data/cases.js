@@ -407,6 +407,38 @@ export const CASES = [
     deathSummary: "",
     fullHistory: "",
     familyInterviews: [],
+
+    // ── Case page content (bilingual intro, quote, editorial photos) ──
+    introEs: `Paula, mayor de seis hermanos y madre de dos niños, su familia y vecinos la recuerdan siempre alegre y muy cercana a Dios.
+
+La noche de su muerte y minutos antes del toque de queda, Paula sale a comprar al negocio de la esquina vistiendo solo una bata. A pocas cuadras del lugar, un supermercado estaba siendo saqueado e incendiado. En la madrugada, su cuerpo fue encontrado por bomberos, junto al de otra mujer (Alicia Cofré, 42), cerca de la salida del local.
+
+Su familia cree que por su curiosidad y el caos, Paula fue atrapada y puesta dentro del lugar para justificar la violencia de las protestas. Su cuerpo, no calcinado pese a estar dentro de un lugar de incendio, presentaba signos de tortura.`,
+
+    introEn: `Paula, the oldest of six siblings and mother of two children, is remembered as a very joyful woman, and very close to God.
+
+The night of her death, minutes before the curfew, Paula went out to a corner store wearing only a night robe. Meanwhile, a nearby supermarket was being looted and burned down only a few blocks from Paula's. Later that night, firefighters found her body alongside another woman (Alicia Cofré, 42) near the supermarket exit.
+
+Her family believes Paula got trapped in the chaos, arrested, and later placed inside by military forces to plant evidence of a violent protest. Although after being inside a burned-out store, her body was not calcinated and showed signs of torture.`,
+
+    quoteEs: `(...)Ese día estábamos comiendo en el otro comedor y veo que (Paula) va saliendo y le veo la pura parte del talón. Le pregunto a la vieja "¿La Paula salió?" y me dice, "fue a comprar una bebida", ojalá se venga al tiro, iba a estar con la cuestión del toque de queda. (...)
+
+Ramon Lorca, padre de Paula`,
+
+    quoteEn: `(...)We were having dinner that day, and I noticed Paula was going out. I only got to see the heel of her shoe! So, I asked my wife where she was going, and she said: "To the corner store to get some sodas." I thought: hopefully, she would return soon because the curfew was about to start. (...)
+
+Ramon Lorca, Paula's father.`,
+
+    bookImage: "/assets/images/paulalorca/book.png",
+
+    // Editorial photos shown on the case page layout (not the full Cloudinary gallery)
+    casePhotos: [
+      { src: "/assets/images/paulalorca/1.png", alt: "Familia reunida en una mesa" },
+      { src: "/assets/images/paulalorca/2.png", alt: "Tela blanca colgando en un interior" },
+      { src: "/assets/images/paulalorca/3.png", alt: "Paisaje urbano con vegetación" },
+      { src: "/assets/images/paulalorca/4.png", alt: "Interior oscuro con línea de luz" },
+      { src: "/assets/images/paulalorca/5.png", alt: "Retrato enmarcado en una pared" },
+    ],
     images: [
   "https://res.cloudinary.com/dik90bqk4/image/upload/v1774374028/PHOTO-2020-11-21-15-53-48_apxtlj.webp",
   "https://res.cloudinary.com/dik90bqk4/image/upload/v1774374024/PHOTO-2020-11-21-15-40-25_cfubdp.webp",

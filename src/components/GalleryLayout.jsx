@@ -9,39 +9,7 @@ import { useState } from "react";
 
 // ── Add photos here under each category ──────────────────────────────────────
 const GALLERY_CATEGORIES = {
-  Grafica: [
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370088/220209_REPROS_PAPELES_PROTESTA_JAM_022_vua3yw.webp", alt: "PAPELES PROTESTA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370086/220209_REPROS_PAPELES_PROTESTA_JAM_019_wxp5nc.webp", alt: "PAPELES PROTESTA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370085/220209_REPROS_PAPELES_PROTESTA_JAM_018_nw2kie.webp", alt: "PAPELES PROTESTA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370083/220209_REPROS_PAPELES_PROTESTA_JAM_016_g80wpf.webp", alt: "PAPELES PROTESTA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370081/220209_REPROS_PAPELES_PROTESTA_JAM_014_xsqey9.webp", alt: "PAPELES PROTESTA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370079/220209_REPROS_PAPELES_PROTESTA_JAM_013_uogqzd.webp", alt: "PAPELES PROTESTA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370077/220209_REPROS_PAPELES_PROTESTA_JAM_012_gj4bnj.webp", alt: "PAPELES PROTESTA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370075/220209_REPROS_PAPELES_PROTESTA_JAM_010_qmpmpk.webp", alt: "PAPELES PROTESTA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370073/220209_REPROS_PAPELES_PROTESTA_JAM_009_uhpizr.webp", alt: "PAPELES PROTESTA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370071/220209_REPROS_PAPELES_PROTESTA_JAM_008_chomnd.webp", alt: "PAPELES PROTESTA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370069/220209_REPROS_PAPELES_PROTESTA_JAM_007_d3fmg5.webp", alt: "PAPELES PROTESTA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370067/220209_REPROS_PAPELES_PROTESTA_JAM_004_aokfty.webp", alt: "PAPELES PROTESTA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370065/220209_REPROS_PAPELES_PROTESTA_JAM_003_dtxggh.webp", alt: "PAPELES PROTESTA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370064/220209_REPROS_PAPELES_PROTESTA_JAM_002_iowhw6.webp", alt: "PAPELES PROTESTA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369850/_JAM9383_i0ynrm.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370062/_JAM9385_ei7ooz.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774370060/_JAM9384_f17lt5.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369848/_JAM9382_ypya1n.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369846/_JAM9381_n92a0l.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369844/_JAM9380_scrf6s.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369843/_JAM9379_remdwa.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369841/_JAM9378_wbwbhp.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369839/_JAM9377_atldwp.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369837/_JAM9376_t5prpb.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369835/_JAM9375_wwlpsf.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369834/_JAM9374_zx6yir.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369832/_JAM9373_bbyuzh.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369830/_JAM9372_goubcl.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369828/_JAM7049_y7mxnc.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369827/_JAM7045_ao9ng6.webp", alt: "GRAFICA" },
-    { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369825/_JAM7040_wnab9x.webp", alt: "GRAFICA" },
-  ],
+  Grafica: [],
 
   Paisajes: [
     { src: "https://res.cloudinary.com/dik90bqk4/image/upload/v1774369744/paisajeinvisible_IR_JAM_021_zigmne.webp", alt: "PAISAJE" },
@@ -156,15 +124,20 @@ export const CATEGORIES = Object.keys(GALLERY_CATEGORIES); // ["Grafica", "Paisa
 
 // useGalleryLayout — all state and logic for the gallery.
 // GalleryPage imports this and handles the rendering.
-export function useGalleryLayout() {
+//
+// sanityPhotos: object with { Grafica: [...], Paisajes: [...], Protestas: [...] }
+// fetched from Sanity on the server. These appear FIRST, then Cloudinary photos follow.
+export function useGalleryLayout(sanityPhotos = {}) {
   // Which category tab is active
   const [activeCategory, setActiveCategory] = useState("Paisajes");
 
   // Photo open in the lightbox (null = closed)
   const [lightbox, setLightbox] = useState(null);
 
-  // All photos for the active category
-  const photos = GALLERY_CATEGORIES[activeCategory];
+  // Merge: Sanity photos first, then Cloudinary photos after
+  const sanity = sanityPhotos[activeCategory] || [];
+  const cloudinary = GALLERY_CATEGORIES[activeCategory] || [];
+  const photos = [...sanity, ...cloudinary];
 
   // Close lightbox on Escape key
   function handleKeyDown(e) {
